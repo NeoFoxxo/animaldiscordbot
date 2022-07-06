@@ -7,14 +7,22 @@ import re
 import praw
 from discord.ext import commands
 #important codes
+with open('disc-token.txt', 'r') as f:
+    tokendiscord = f.read()
+
+with open('reddit-client-id.txt', 'r') as f:
+    redditid = f.read()
+
+with open('reddit-client-secret.txt', 'r') as f:
+    redditsecret = f.read()
 
 reddit = praw.Reddit(
-    client_id="o_AU_eEcaIF1-_mNKTJ81A",
-    client_secret="yDMxSj8g3v-IG6SOeV6k4arHwJkCrw",
+    client_id=redditid,
+    client_secret=redditsecret,
     user_agent="discord bot",    
 )
 
-TOKEN = 'OTk0MDY4ODMzNzUxMDIzNzE2.Gqy4Ii.DrHpB8vCKPDWOu9Qs4Uho8UUPPJAHE5YpNrZaw'
+TOKEN = tokendiscord
 
 client = discord.Client()
 
@@ -56,7 +64,7 @@ async def on_message(message):
             random_post_number = random.randint(0, 250)
             random_post = posts[random_post_number]
             strForm = "{}".format(random_post.url)
-            if 'v.redd.it' or 'gallery' in random_post.url:
+            if 'v.redd.it' or 'https://www.reddit.com/gallery' or 'https://www.reddit.com/r/' in random_post.url:
               random_post_number = random.randint(0, 250)
               random_post = posts[random_post_number]
               strForm = "{}".format(random_post.url)
@@ -87,10 +95,10 @@ async def on_message(message):
             random_post = posts[random_post_number]
             strForm = "{}".format(random_post.url)
             if 'v.redd.it' or 'gallery' in random_post.url:
-              random_post_number = random.randint(0, 250)
-              random_post = posts[random_post_number]
-              strForm = "{}".format(random_post.url)
-              await message.channel.send(random_post.url)
+              random_post_number2 = random.randint(0, 250)
+              random_post2 = posts[random_post_number2]
+              strForm = "{}".format(random_post2.url)
+              await message.channel.send(random_post2.url)
               return
             else: 
                  await message.channel.send(random_post.url)
@@ -113,6 +121,6 @@ async def on_message(message):
                 await ctx.send(embed=embed)
                 return
         elif user_message.lower() == '!guide':
-            await message.channel.send(f'**!dog**: Get a photo of a cute doggo! \n **!cat**: Get a photo of a cute cat \n **!bunny**: Get a photo of a cute bunny! \n **!horse**: Get a photo of a cute horse! \n **!random**, Get a photo of a random animal!')
+            await message.channel.send(f'**!dog**: Get a photo of a cute doggo! \n **!cat**: Get a photo of a cute cat! \n **!bunny**: Get a photo of a cute bunny! \n **!horse**: Get a photo of a cute horse! \n **!random**, Get a photo of a random animal!')
             return      
 client.run(TOKEN)
