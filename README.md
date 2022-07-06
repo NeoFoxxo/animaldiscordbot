@@ -1,2 +1,2 @@
 # animaldiscordbot
-pulls cute photos of animals from reddit
+turn back now
