@@ -19,7 +19,8 @@ with open('reddit-client-secret.txt', 'r') as f:
 reddit = praw.Reddit(
     client_id=redditid,
     client_secret=redditsecret,
-    user_agent="discord bot",    
+    user_agent="discord bot",
+    check_for_async=False   
 )
 
 TOKEN = tokendiscord
@@ -45,64 +46,123 @@ async def on_message(message):
             await message.channel.send(f'wasup {username}!')
             return
         elif user_message.lower() == '!dog':
+            message1 = await message.channel.send(f'One cute dog coming up {username}!')
+            message2 = await message.channel.send(f'https://user-images.githubusercontent.com/3053271/32455273-6118a5fc-c2e7-11e7-8265-9829b231be4d.gif')
             sub = reddit.subreddit('rarepuppers')
             posts = [post for post in sub.hot(limit=250)]
             random_post_number = random.randint(0, 250)
             random_post = posts[random_post_number]
-            strForm = "{}".format(random_post.url)
-            if 'v.redd.it' or 'gallery' in random_post.url:
-              random_post_number = random.randint(0, 250)
+            if random_post.is_video:
+              random_post_number = random.choice(range (0, 250))
               random_post = posts[random_post_number]
-              strForm = "{}".format(random_post.url)
+              await message1.delete()
+              await message2.delete()
               await message.channel.send(random_post.url)
               return
+            elif random_post_number == 14:
+                await message1.delete()
+                await message2.delete()
+                await message.channel.send(f'https://cdn.discordapp.com/attachments/461799833540231170/994573993355001856/6m1k6j.jpg')
+            elif 'gallery_data' in random_post.__dict__:
+              random_post_number = random.choice(range (0, 250))
+              random_post = posts[random_post_number]
+              await message1.delete()
+              await message2.delete()
+              await message.channel.send(random_post.url)
+              return
+            await message1.delete()
+            await message2.delete()
             await message.channel.send(random_post.url)
             return
         elif user_message.lower() == '!cat':
+            message1 = await message.channel.send(f'One cute cat coming up {username}!')
+            message2 = await message.channel.send(f'https://user-images.githubusercontent.com/3053271/32455273-6118a5fc-c2e7-11e7-8265-9829b231be4d.gif')
             sub = reddit.subreddit('catpictures')
             posts = [post for post in sub.hot(limit=250)]
-            random_post_number = random.randint(0, 250)
+            random_post_number = random.choice(range (0, 250))
             random_post = posts[random_post_number]
-            strForm = "{}".format(random_post.url)
-            if 'v.redd.it' or 'https://www.reddit.com/gallery' or 'https://www.reddit.com/r/' in random_post.url:
-              random_post_number = random.randint(0, 250)
+            if random_post.is_video:
+              random_post_number = random.choice(range (0, 250))
               random_post = posts[random_post_number]
-              strForm = "{}".format(random_post.url)
+              await message1.delete()
+              await message2.delete()
               await message.channel.send(random_post.url)
               return
+            elif random_post_number == 14:
+                await message1.delete()
+                await message2.delete()
+                await message.channel.send(f'https://cdn.discordapp.com/attachments/461799833540231170/994573993355001856/6m1k6j.jpg')
+            elif 'gallery_data' in random_post.__dict__:
+              random_post_number = random.choice(range (0, 250))
+              random_post = posts[random_post_number]
+              await message1.delete()
+              await message2.delete()
+              await message.channel.send(random_post.url)
+              return
+            await message1.delete()
+            await message2.delete()
             await message.channel.send(random_post.url)
             return
         elif user_message.lower() == '!bunny':
+            message1 = await message.channel.send(f'One cute bunny coming up {username}!')
+            message2 = await message.channel.send(f'https://user-images.githubusercontent.com/3053271/32455273-6118a5fc-c2e7-11e7-8265-9829b231be4d.gif')
             sub = reddit.subreddit('bunnyflops')
             posts = [post for post in sub.hot(limit=250)]
             random_post_number = random.randint(0, 250)
             random_post = posts[random_post_number]
-            strForm = "{}".format(random_post.url)
-            if 'v.redd.it' or 'gallery' in random_post.url:
-              random_post_number = random.randint(0, 250)
+            if random_post.is_video:
+              random_post_number = random.choice(range (0, 250))
               random_post = posts[random_post_number]
-              strForm = "{}".format(random_post.url)
+              await message1.delete()
+              await message2.delete()
               await message.channel.send(random_post.url)
               return
+            elif random_post_number == 14:
+                await message1.delete()
+                await message2.delete()
+                await message.channel.send(f'https://cdn.discordapp.com/attachments/461799833540231170/994573993355001856/6m1k6j.jpg')
+            elif 'gallery_data' in random_post.__dict__:
+              random_post_number = random.choice(range (0, 250))
+              random_post = posts[random_post_number]
+              await message1.delete()
+              await message2.delete()
+              await message.channel.send(random_post.url)
+              return
+            await message1.delete()
+            await message2.delete()
             await message.channel.send(random_post.url)
             return
         elif user_message.lower() == '!random':
+            message1 = await message.channel.send(f'One cute animal coming up {username}!')
+            message2 = await message.channel.send(f'https://user-images.githubusercontent.com/3053271/32455273-6118a5fc-c2e7-11e7-8265-9829b231be4d.gif')
             list = ['bunnyflops', 'catpictures', 'rarepuppers', 'aww', 'awww']
             random_sub = random.choice(list)
             sub = reddit.subreddit(random_sub)
             posts = [post for post in sub.hot(limit=250)]
             random_post_number = random.randint(0, 250)
             random_post = posts[random_post_number]
-            strForm = "{}".format(random_post.url)
-            if 'v.redd.it' or 'gallery' in random_post.url:
-              random_post_number2 = random.randint(0, 250)
-              random_post2 = posts[random_post_number2]
-              strForm = "{}".format(random_post2.url)
-              await message.channel.send(random_post2.url)
+            if random_post.is_video:
+              random_post_number = random.choice(range (0, 250))
+              random_post = posts[random_post_number]
+              await message1.delete()
+              await message2.delete()
+              await message.channel.send(random_post.url)
               return
-            else: 
-                 await message.channel.send(random_post.url)
-                 return
+            elif random_post_number == 14:
+                await message1.delete()
+                await message2.delete()
+                await message.channel.send(f'https://cdn.discordapp.com/attachments/461799833540231170/994573993355001856/6m1k6j.jpg')
+            elif 'gallery_data' in random_post.__dict__:
+              random_post_number = random.choice(range (0, 250))
+              random_post = posts[random_post_number]
+              await message1.delete()
+              await message2.delete()
+              await message.channel.send(random_post.url)
+              return
+            await message1.delete()
+            await message2.delete()
+            await message.channel.send(random_post.url)
+            return
         elif user_message.lower() == '!horse':
             await message.channel.send(f'no horses for you {username}!')
             return
@@ -121,6 +181,6 @@ async def on_message(message):
                 await ctx.send(embed=embed)
                 return
         elif user_message.lower() == '!guide':
-            await message.channel.send(f'**!dog**: Get a photo of a cute doggo! \n **!cat**: Get a photo of a cute cat! \n **!bunny**: Get a photo of a cute bunny! \n **!horse**: Get a photo of a cute horse! \n **!random**, Get a photo of a random animal!')
+            await message.channel.send(f'**!dog**: Get a photo of a cute doggo! \n**!cat**: Get a photo of a cute cat! \n**!bunny**: Get a photo of a cute bunny! \n**!horse**: Get a photo of a cute horse! \n**!random**: Get a photo of a random animal!')
             return      
 client.run(TOKEN)
