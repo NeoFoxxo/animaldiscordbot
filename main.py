@@ -26,7 +26,7 @@ reddit = praw.Reddit(
 TOKEN = tokendiscord
 
 client = discord.Client()
-
+depss = random.randint(0, 50)
 @client.event
 async def on_ready():
     print('we have logged in as {0.user}'.format(client))
@@ -50,22 +50,25 @@ async def on_message(message):
             message2 = await message.channel.send(f'https://user-images.githubusercontent.com/3053271/32455273-6118a5fc-c2e7-11e7-8265-9829b231be4d.gif')
             sub = reddit.subreddit('rarepuppers')
             posts = [post for post in sub.hot(limit=250)]
-            random_post_number = random.randint(0, 250)
-            random_post = posts[random_post_number]
+            random_post = random.choice(posts)
+            #random_post_number = random.choice(range (0, 250))
+            #random_post = posts[random_post_number]
             if random_post.is_video:
-              random_post_number = random.choice(range (0, 250))
-              random_post = posts[random_post_number]
+              random_post = random.choice(posts)
+              #random_post_number = random.choice(range (0, 250))
+              #random_post = posts[random_post_number]
               await message1.delete()
               await message2.delete()
               await message.channel.send(random_post.url)
               return
-            elif random_post_number == 14:
+            elif depss == 14:
                 await message1.delete()
                 await message2.delete()
                 await message.channel.send(f'https://cdn.discordapp.com/attachments/461799833540231170/994573993355001856/6m1k6j.jpg')
             elif 'gallery_data' in random_post.__dict__:
-              random_post_number = random.choice(range (0, 250))
-              random_post = posts[random_post_number]
+              random_post = random.choice(posts)
+              #random_post_number = random.choice(range (0, 250))
+              #random_post = posts[random_post_number]
               await message1.delete()
               await message2.delete()
               await message.channel.send(random_post.url)
@@ -79,22 +82,19 @@ async def on_message(message):
             message2 = await message.channel.send(f'https://user-images.githubusercontent.com/3053271/32455273-6118a5fc-c2e7-11e7-8265-9829b231be4d.gif')
             sub = reddit.subreddit('catpictures')
             posts = [post for post in sub.hot(limit=250)]
-            random_post_number = random.choice(range (0, 250))
-            random_post = posts[random_post_number]
+            random_post = random.choice(posts)
             if random_post.is_video:
-              random_post_number = random.choice(range (0, 250))
-              random_post = posts[random_post_number]
+              random_post = random.choice(posts)
               await message1.delete()
               await message2.delete()
               await message.channel.send(random_post.url)
               return
-            elif random_post_number == 14:
+            elif depss == 14:
                 await message1.delete()
                 await message2.delete()
                 await message.channel.send(f'https://cdn.discordapp.com/attachments/461799833540231170/994573993355001856/6m1k6j.jpg')
             elif 'gallery_data' in random_post.__dict__:
-              random_post_number = random.choice(range (0, 250))
-              random_post = posts[random_post_number]
+              random_post = random.choice(posts)
               await message1.delete()
               await message2.delete()
               await message.channel.send(random_post.url)
@@ -108,22 +108,19 @@ async def on_message(message):
             message2 = await message.channel.send(f'https://user-images.githubusercontent.com/3053271/32455273-6118a5fc-c2e7-11e7-8265-9829b231be4d.gif')
             sub = reddit.subreddit('bunnyflops')
             posts = [post for post in sub.hot(limit=250)]
-            random_post_number = random.randint(0, 250)
-            random_post = posts[random_post_number]
+            random_post = random.choice(posts)
             if random_post.is_video:
-              random_post_number = random.choice(range (0, 250))
-              random_post = posts[random_post_number]
+              random_post = random.choice(posts)
               await message1.delete()
               await message2.delete()
               await message.channel.send(random_post.url)
               return
-            elif random_post_number == 14:
+            elif depss == 14:
                 await message1.delete()
                 await message2.delete()
                 await message.channel.send(f'https://cdn.discordapp.com/attachments/461799833540231170/994573993355001856/6m1k6j.jpg')
             elif 'gallery_data' in random_post.__dict__:
-              random_post_number = random.choice(range (0, 250))
-              random_post = posts[random_post_number]
+              random_post = random.choice(posts)
               await message1.delete()
               await message2.delete()
               await message.channel.send(random_post.url)
@@ -139,22 +136,19 @@ async def on_message(message):
             random_sub = random.choice(list)
             sub = reddit.subreddit(random_sub)
             posts = [post for post in sub.hot(limit=250)]
-            random_post_number = random.randint(0, 250)
-            random_post = posts[random_post_number]
+            random_post = random.choice(posts)
             if random_post.is_video:
-              random_post_number = random.choice(range (0, 250))
-              random_post = posts[random_post_number]
+              random_post = random.choice(posts)
               await message1.delete()
               await message2.delete()
               await message.channel.send(random_post.url)
               return
-            elif random_post_number == 14:
+            elif depss == 14:
                 await message1.delete()
                 await message2.delete()
                 await message.channel.send(f'https://cdn.discordapp.com/attachments/461799833540231170/994573993355001856/6m1k6j.jpg')
             elif 'gallery_data' in random_post.__dict__:
-              random_post_number = random.choice(range (0, 250))
-              random_post = posts[random_post_number]
+              random_post = random.choice(posts)
               await message1.delete()
               await message2.delete()
               await message.channel.send(random_post.url)
