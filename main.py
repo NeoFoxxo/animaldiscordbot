@@ -1,3 +1,4 @@
+from asyncore import loop
 from ssl import OP_NO_COMPRESSION
 import discord
 import random
@@ -16,6 +17,9 @@ with open('reddit-client-id.txt', 'r') as f:
 
 with open('reddit-client-secret.txt', 'r') as f:
     redditsecret = f.read()
+
+
+
 
 reddit = praw.Reddit(
     client_id=redditid,
@@ -65,41 +69,45 @@ async def on_message(message):
                 await message2.delete()
                 await message.channel.send(f'https://cdn.discordapp.com/attachments/461799833540231170/994573993355001856/6m1k6j.jpg')
                 return
-            while video in random_post.url:
-              random_post = random.choice(posts)
-              if video not in random_post.url:
-                await message1.delete()
-                await message2.delete()
-                await message.channel.send(random_post.url)
-                break 
-            while gallery in random_post.url:
-              random_post = random.choice(posts)
-              if gallery not in random_post.url:
-                await message1.delete()
-                await message2.delete()
-                await message.channel.send(random_post.url)
-                break 
-            #else:  
+            #while gallery random_post.url:
+              #random_post = random.choice(posts)
+              #if gallery not in random_post.url:
                 #await message1.delete()
                 #await message2.delete()
                 #await message.channel.send(random_post.url)
-                #return
-            #elif 'gallery_data' in random_post.__dict__:
+                #break 
+            #while video in random_post.url:
               #random_post = random.choice(posts)
-              #await message1.delete()
-              #await message2.delete()
-              #await message.channel.send(random_post.url)
-              #return
-            await message1.delete()
-            await message2.delete()
-            await message.channel.send(random_post.url)
-            return
+              #if video not in random_post.url:
+                #await message1.delete()
+                #await message2.delete()
+                #await message.channel.send(random_post.url)
+                #break
+            if gallery and video in random_post.url:
+              while gallery and video in random_post.url:
+                random_post = random.choice(posts)
+                if gallery not in random_post.url:
+                    await message1.delete()
+                    await message2.delete()
+                    await message.channel.send(random_post.url)
+                    break
+                if video not in random_post.url:
+                    await message1.delete()
+                    await message2.delete()
+                    await message.channel.send(random_post.url)
+                    break
+            else:
+                await message1.delete()
+                await message2.delete()
+                await message.channel.send(random_post.url)
+                return
         elif user_message.lower() == '!cat':
             message1 = await message.channel.send(f'One cute cat coming up {username}!')
             message2 = await message.channel.send(f'https://user-images.githubusercontent.com/3053271/32455273-6118a5fc-c2e7-11e7-8265-9829b231be4d.gif')
             sub = reddit.subreddit('catpictures')
             posts = [post for post in sub.hot(limit=250)]
             random_post = random.choice(posts)
+            depss = random.randint(0, 14)
             if random_post.is_video:
               random_post = random.choice(posts)
               await message1.delete()
@@ -120,12 +128,13 @@ async def on_message(message):
             await message2.delete()
             await message.channel.send(random_post.url)
             return
-        elif user_message.lower() == '!bunny':
-            message1 = await message.channel.send(f'One cute bunny coming up {username}!')
+        elif user_message.lower() == '!rabbit':
+            message1 = await message.channel.send(f'One cute rabbit coming up {username}!')
             message2 = await message.channel.send(f'https://user-images.githubusercontent.com/3053271/32455273-6118a5fc-c2e7-11e7-8265-9829b231be4d.gif')
             sub = reddit.subreddit('bunnyflops')
             posts = [post for post in sub.hot(limit=250)]
             random_post = random.choice(posts)
+            depss = random.randint(0, 14)
             if random_post.is_video:
               random_post = random.choice(posts)
               await message1.delete()
@@ -155,6 +164,7 @@ async def on_message(message):
             sub = reddit.subreddit(random_sub)
             posts = [post for post in sub.hot(limit=250)]
             random_post = random.choice(posts)
+            depss = random.randint(0, 14)
             #if post is a video post find another post
             if random_post.is_video:
               random_post = random.choice(posts)
@@ -186,10 +196,17 @@ async def on_message(message):
             embedvar=discord.Embed(title="Commands", description="Here are the all commands and what they do", color=discord.Color.blue())
             embedvar.add_field(name="**!dog**", value="Get a photo of a cute doggo!", inline=False)
             embedvar.add_field(name="**!cat**", value="Get a photo of a cute cat!", inline=False)
-            embedvar.add_field(name="**!bunny**", value="Get a photo of a cute bunny!", inline=False)
+            embedvar.add_field(name="**!rabbit**", value="Get a photo of a cute bunny!", inline=False)
             embedvar.add_field(name="**!horse**", value="Get a photo of a cute horse!", inline=False)
             embedvar.add_field(name="**!random**", value="Get a photo of a random animal!", inline=False)
+            embedvar.add_field(name="**!dogfact**", value="Get a random fact about dogs!", inline=False)
             await message.channel.send(embed=embedvar)
-            return     
+            return
+        #picks a random fact from a list of facts in a text file
+        elif user_message.lower() == '!dogfact':
+            lines = open('dog_facts.txt', encoding="utf8").read().splitlines()
+            dogfact = random.choice(lines)
+            await message.channel.send(dogfact)
+            return  
 
 client.run(TOKEN)
