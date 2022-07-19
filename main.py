@@ -69,38 +69,18 @@ async def on_message(message):
                 await message2.delete()
                 await message.channel.send(f'https://cdn.discordapp.com/attachments/461799833540231170/994573993355001856/6m1k6j.jpg')
                 return
-            #while gallery random_post.url:
-              #random_post = random.choice(posts)
-              #if gallery not in random_post.url:
-                #await message1.delete()
-                #await message2.delete()
-                #await message.channel.send(random_post.url)
-                #break 
-            #while video in random_post.url:
-              #random_post = random.choice(posts)
-              #if video not in random_post.url:
-                #await message1.delete()
-                #await message2.delete()
-                #await message.channel.send(random_post.url)
-                #break
-            if gallery and video in random_post.url:
-              while gallery and video in random_post.url:
+            while gallery and video in random_post.url:
+                sub = reddit.subreddit('rarepuppers')
+                posts = [post for post in sub.hot(limit=250)]
                 random_post = random.choice(posts)
-                if gallery not in random_post.url:
-                    await message1.delete()
-                    await message2.delete()
-                    await message.channel.send(random_post.url)
+                if gallery and video in random_post.url:
+                    continue
+                else:
                     break
-                if video not in random_post.url:
-                    await message1.delete()
-                    await message2.delete()
-                    await message.channel.send(random_post.url)
-                    break
-            else:
-                await message1.delete()
-                await message2.delete()
-                await message.channel.send(random_post.url)
-                return
+            await message1.delete()
+            await message2.delete()
+            await message.channel.send(random_post.url)                
+            
         elif user_message.lower() == '!cat':
             message1 = await message.channel.send(f'One cute cat coming up {username}!')
             message2 = await message.channel.send(f'https://user-images.githubusercontent.com/3053271/32455273-6118a5fc-c2e7-11e7-8265-9829b231be4d.gif')
